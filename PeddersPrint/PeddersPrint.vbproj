@@ -14,7 +14,7 @@
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <IsWebBootstrapper>false</IsWebBootstrapper>
-    <PublishUrl>E:\Pedders2\</PublishUrl>
+    <PublishUrl>E:\Pedders1.0.9\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Unc</InstallFrom>
     <UpdateEnabled>true</UpdateEnabled>
@@ -27,8 +27,8 @@
     <InstallUrl>\\download\Pedders\</InstallUrl>
     <ProductName>Pedders Print</ProductName>
     <PublisherName>Nick Runnalls 0403 200 640 nick%40jocman.com</PublisherName>
-    <ApplicationRevision>8</ApplicationRevision>
-    <ApplicationVersion>1.1.0.8</ApplicationVersion>
+    <ApplicationRevision>9</ApplicationRevision>
+    <ApplicationVersion>1.1.0.9</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
