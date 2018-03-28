@@ -145,16 +145,25 @@ Public Class Main
                     LblPrintMessage.Text = LblPrintMessage.Text & MessageCode & vbCr
                     tc.WriteLine(MessageCode)
                     If tc.Read() <> "" Then MessageBox.Show("Error Message not sent successfully", "Connection Error")
-                    LblPrintMessage.Text = LblPrintMessage.Text & "MD,," & txProduct.Text & " " & txSpec.Text & " " & NudMM.Value & "/" & NudYY.Value
-
-                    tc.WriteLine("MD,," & txProduct.Text & " " & txSpec.Text & " " & NudMM.Value & "/" & NudYY.Value)
+                    If cbPrintLogo.CheckState Then
+                        LblPrintMessage.Text = LblPrintMessage.Text & "MD,," & txProduct.Text & " " & txSpec.Text & " " & NudMM.Value & "/" & NudYY.Value
+                        tc.WriteLine("MD,," & txProduct.Text & " " & txSpec.Text & " " & NudMM.Value & "/" & NudYY.Value)
+                    Else
+                        LblPrintMessage.Text = LblPrintMessage.Text & "MD," & txProduct.Text & " " & txSpec.Text & " " & NudMM.Value & "/" & NudYY.Value
+                        tc.WriteLine("MD," & txProduct.Text & " " & txSpec.Text & " " & NudMM.Value & "/" & NudYY.Value)
+                    End If
                     If tc.Read() <> "" Then MessageBox.Show("Error Message not sent successfully", "Connection Error")
                 Else
                     LblPrintMessage.Text = LblPrintMessage.Text & MessageCode & vbCr
                     tc.WriteLine(MessageCode)
                     If tc.Read() <> "" Then MessageBox.Show("Error Message not sent successfully", "Connection Error")
-                    LblPrintMessage.Text = LblPrintMessage.Text & "'MD,," & txProduct.Text & " " & txSpec.Text & " " & NudMM.Value & "/" & NudYY.Value & "/" & NudBatch.Value
-                    tc.WriteLine("MD,," & txProduct.Text & " " & txSpec.Text & " " & NudMM.Value & "/" & NudYY.Value & "/" & NudBatch.Value)
+                    If cbPrintLogo.CheckState Then
+                        LblPrintMessage.Text = LblPrintMessage.Text & "'MD,," & txProduct.Text & " " & txSpec.Text & " " & NudMM.Value & "/" & NudYY.Value & "/" & NudBatch.Value
+                        tc.WriteLine("MD,," & txProduct.Text & " " & txSpec.Text & " " & NudMM.Value & "/" & NudYY.Value & "/" & NudBatch.Value)
+                    Else
+                        LblPrintMessage.Text = LblPrintMessage.Text & "'MD,," & txProduct.Text & " " & txSpec.Text & " " & NudMM.Value & "/" & NudYY.Value & "/" & NudBatch.Value
+                        tc.WriteLine("MD," & txProduct.Text & " " & txSpec.Text & " " & NudMM.Value & "/" & NudYY.Value & "/" & NudBatch.Value)
+                    End If
                     If tc.Read() <> "" Then MessageBox.Show("Error Message not sent successfully", "Connection Error")
                 End If
             Else
