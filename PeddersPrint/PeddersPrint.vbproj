@@ -14,7 +14,7 @@
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <IsWebBootstrapper>false</IsWebBootstrapper>
-    <PublishUrl>Ok\</PublishUrl>
+    <PublishUrl>E:\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Unc</InstallFrom>
     <UpdateEnabled>false</UpdateEnabled>
@@ -132,6 +132,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="Settings.vb" />
     <Compile Include="TelnetInterface.Designer.vb">
       <DependentUpon>TelnetInterface.vb</DependentUpon>
     </Compile>
@@ -218,6 +219,7 @@
     <None Include="Resources\Pedders.ico" />
     <None Include="Resources\Icon1.ico" />
     <None Include="Resources\citronix-ci-3500.tif" />
+    <Content Include="Resources\ci5300.jpg" />
     <Content Include="Resources\Logo-165x218.jpg" />
     <None Include="Resources\PeddersIcon.ico" />
     <None Include="Resources\Pedders.jpg" />

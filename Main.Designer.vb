@@ -24,7 +24,6 @@ Partial Class Main
     Private Sub InitializeComponent()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.txBarcode = New System.Windows.Forms.TextBox()
-        Me.Label2 = New System.Windows.Forms.Label()
         Me.btSelect = New System.Windows.Forms.Button()
         Me.btPrint = New System.Windows.Forms.Button()
         Me.txProduct = New System.Windows.Forms.TextBox()
@@ -41,17 +40,19 @@ Partial Class Main
         Me.Label3 = New System.Windows.Forms.Label()
         Me.NudMM = New System.Windows.Forms.NumericUpDown()
         Me.NudYY = New System.Windows.Forms.NumericUpDown()
-        Me.NudBatch = New System.Windows.Forms.NumericUpDown()
-        Me.PictureBox2 = New System.Windows.Forms.PictureBox()
+        Me.PicCi3500 = New System.Windows.Forms.PictureBox()
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.cbPrintLogo = New System.Windows.Forms.CheckBox()
         Me.Label4 = New System.Windows.Forms.Label()
+        Me.PicCI5300 = New System.Windows.Forms.PictureBox()
+        Me.cbCi3500 = New System.Windows.Forms.CheckBox()
+        Me.cbCi5300 = New System.Windows.Forms.CheckBox()
         Me.ms.SuspendLayout()
         CType(Me.NudMM, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.NudYY, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.NudBatch, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PicCi3500, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PicCI5300, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'Label1
@@ -71,15 +72,6 @@ Partial Class Main
         Me.txBarcode.Name = "txBarcode"
         Me.txBarcode.Size = New System.Drawing.Size(243, 33)
         Me.txBarcode.TabIndex = 1
-        '
-        'Label2
-        '
-        Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(202, 400)
-        Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(172, 18)
-        Me.Label2.TabIndex = 0
-        Me.Label2.Text = "Enter Batch Number"
         '
         'btSelect
         '
@@ -235,28 +227,16 @@ Partial Class Main
         Me.NudYY.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         Me.NudYY.Value = New Decimal(New Integer() {17, 0, 0, 0})
         '
-        'NudBatch
+        'PicCi3500
         '
-        Me.NudBatch.AccessibleDescription = "Batch Nbr"
-        Me.NudBatch.Enabled = False
-        Me.NudBatch.Location = New System.Drawing.Point(406, 400)
-        Me.NudBatch.Maximum = New Decimal(New Integer() {99, 0, 0, 0})
-        Me.NudBatch.Name = "NudBatch"
-        Me.NudBatch.ReadOnly = True
-        Me.NudBatch.Size = New System.Drawing.Size(48, 27)
-        Me.NudBatch.TabIndex = 8
-        Me.NudBatch.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        '
-        'PictureBox2
-        '
-        Me.PictureBox2.Image = Global.PeddersPrint.My.Resources.Resources.citronixTif
-        Me.PictureBox2.InitialImage = Nothing
-        Me.PictureBox2.Location = New System.Drawing.Point(585, 197)
-        Me.PictureBox2.Name = "PictureBox2"
-        Me.PictureBox2.Size = New System.Drawing.Size(151, 118)
-        Me.PictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-        Me.PictureBox2.TabIndex = 7
-        Me.PictureBox2.TabStop = False
+        Me.PicCi3500.Image = Global.PeddersPrint.My.Resources.Resources.citronixTif
+        Me.PicCi3500.InitialImage = Nothing
+        Me.PicCi3500.Location = New System.Drawing.Point(585, 148)
+        Me.PicCi3500.Name = "PicCi3500"
+        Me.PicCi3500.Size = New System.Drawing.Size(151, 118)
+        Me.PicCi3500.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
+        Me.PicCi3500.TabIndex = 7
+        Me.PicCi3500.TabStop = False
         '
         'PictureBox1
         '
@@ -290,14 +270,45 @@ Partial Class Main
         Me.Label4.Text = "Product Code"
         Me.Label4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
+        'PicCI5300
+        '
+        Me.PicCI5300.Image = Global.PeddersPrint.My.Resources.Resources.ci5300
+        Me.PicCI5300.InitialImage = Nothing
+        Me.PicCI5300.Location = New System.Drawing.Point(585, 267)
+        Me.PicCI5300.Name = "PicCI5300"
+        Me.PicCI5300.Size = New System.Drawing.Size(151, 118)
+        Me.PicCI5300.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
+        Me.PicCI5300.TabIndex = 16
+        Me.PicCI5300.TabStop = False
+        '
+        'cbCi3500
+        '
+        Me.cbCi3500.AutoSize = True
+        Me.cbCi3500.Location = New System.Drawing.Point(773, 192)
+        Me.cbCi3500.Name = "cbCi3500"
+        Me.cbCi3500.Size = New System.Drawing.Size(15, 14)
+        Me.cbCi3500.TabIndex = 17
+        Me.cbCi3500.UseVisualStyleBackColor = True
+        '
+        'cbCi5300
+        '
+        Me.cbCi5300.AutoSize = True
+        Me.cbCi5300.Location = New System.Drawing.Point(773, 309)
+        Me.cbCi5300.Name = "cbCi5300"
+        Me.cbCi5300.Size = New System.Drawing.Size(15, 14)
+        Me.cbCi5300.TabIndex = 18
+        Me.cbCi5300.UseVisualStyleBackColor = True
+        '
         'Main
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(10.0!, 18.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(828, 600)
+        Me.ClientSize = New System.Drawing.Size(828, 606)
+        Me.Controls.Add(Me.cbCi5300)
+        Me.Controls.Add(Me.cbCi3500)
+        Me.Controls.Add(Me.PicCI5300)
         Me.Controls.Add(Me.Label4)
         Me.Controls.Add(Me.cbPrintLogo)
-        Me.Controls.Add(Me.NudBatch)
         Me.Controls.Add(Me.NudYY)
         Me.Controls.Add(Me.NudMM)
         Me.Controls.Add(Me.Label3)
@@ -309,8 +320,7 @@ Partial Class Main
         Me.Controls.Add(Me.txProduct)
         Me.Controls.Add(Me.btPrint)
         Me.Controls.Add(Me.btSelect)
-        Me.Controls.Add(Me.PictureBox2)
-        Me.Controls.Add(Me.Label2)
+        Me.Controls.Add(Me.PicCi3500)
         Me.Controls.Add(Me.txBarcode)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.PictureBox1)
@@ -324,9 +334,9 @@ Partial Class Main
         Me.ms.PerformLayout()
         CType(Me.NudMM, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.NudYY, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.NudBatch, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PicCi3500, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PicCI5300, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -335,8 +345,7 @@ Partial Class Main
     Friend WithEvents PictureBox1 As PictureBox
     Friend WithEvents Label1 As Label
     Friend WithEvents txBarcode As TextBox
-    Friend WithEvents Label2 As Label
-    Friend WithEvents PictureBox2 As PictureBox
+    Friend WithEvents PicCi3500 As PictureBox
     Friend WithEvents btSelect As Button
     Friend WithEvents btPrint As Button
     Friend WithEvents txProduct As TextBox
@@ -353,7 +362,9 @@ Partial Class Main
     Friend WithEvents Label3 As Label
     Friend WithEvents NudMM As NumericUpDown
     Friend WithEvents NudYY As NumericUpDown
-    Friend WithEvents NudBatch As NumericUpDown
     Friend WithEvents cbPrintLogo As CheckBox
     Friend WithEvents Label4 As Label
+    Friend WithEvents PicCI5300 As PictureBox
+    Friend WithEvents cbCi3500 As CheckBox
+    Friend WithEvents cbCi5300 As CheckBox
 End Class

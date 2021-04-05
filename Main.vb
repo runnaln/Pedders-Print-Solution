@@ -8,9 +8,8 @@ Imports PeddersPrint.MinimalisticTelnet
 Public Class Main
     Dim Full_Stop As String = ""
     Dim TelnetClient As New TcpClient
-    Public host As String = "192.168.0.36"
+    Public host As String = "192.168.0.15"
     Public Shared SpringPath As String
-    Public Shared BatchPath As String
     Public MessageChecked As Boolean = False
     Public Shared ReadOnly Property MyDocuments As String = My.Computer.FileSystem.SpecialDirectories.MyDocuments
 
@@ -63,33 +62,15 @@ Public Class Main
             txBarcode.Focus()
             Return
         End If
-        ' Check if product
-        NudBatch.Value = "0"
+
         txProduct.BackColor = Color.WhiteSmoke
         txSpec.BackColor = Color.WhiteSmoke
-        ConnStr = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source='" & BatchPath & "';Extended Properties='Excel 8.0;HDR=YES;IMEX=1;';"
-        Dim cn2 As New OleDbConnection(ConnStr)
-        ct = "Select Barcode from [Sheet1$] where Barcode = " & txBarcode.Text
-        Dim cm2 As New OleDb.OleDbCommand(ct, cn2)
-        cn2.Open()
-        Dim reader2 As OleDbDataReader = cm2.ExecuteReader()
-
-        If reader2.HasRows Then
-            NudBatch.ReadOnly = False
-            NudBatch.Enabled = True
-            NudBatch.Value = 0
-            NudBatch.Focus()
-        Else
-            Me.AcceptButton = btPrint
-            btPrint.Enabled = True
-            btCancel.Enabled = True
-            btSelect.Enabled = False
-            btPrint.Focus()
-            txBarcode.ReadOnly = True
-
-        End If
-        reader2.Close()
-        cn2.Close()
+        Me.AcceptButton = btPrint
+        btPrint.Enabled = True
+        btCancel.Enabled = True
+        btSelect.Enabled = False
+        btPrint.Focus()
+        txBarcode.ReadOnly = True
         NudMM.ReadOnly = False
         NudMM.Enabled = True
         NudYY.ReadOnly = False
@@ -102,7 +83,7 @@ Public Class Main
     Private Sub btPrint_Click(sender As Object, e As EventArgs) Handles btPrint.Click
 
 
-        host = My.Settings.PrinterIP
+        host = My.Settings.PrinterIP5300
         Dim TCPClient As New TcpClient
         Dim str As String
         Dim MessageCode As String
@@ -141,31 +122,18 @@ Public Class Main
 
                 'If Logo then Print SMLogo else SMTEXT
                 If cbPrintLogo.CheckState Then MessageCode = "SMLOGO" Else MessageCode = "SMTEXT"
-                If NudBatch.Value = "0" Then
-                    LblPrintMessage.Text = LblPrintMessage.Text & MessageCode & vbCr
-                    tc.WriteLine(MessageCode)
-                    If tc.Read() <> "" Then MessageBox.Show("Error Message not sent successfully", "Connection Error")
-                    If cbPrintLogo.CheckState Then
-                        LblPrintMessage.Text = LblPrintMessage.Text & "MD,," & txProduct.Text & " " & txSpec.Text & " " & NudMM.Value & "/" & NudYY.Value
-                        tc.WriteLine("MD,," & txProduct.Text & " " & txSpec.Text & " " & NudMM.Value & "/" & NudYY.Value)
-                    Else
-                        LblPrintMessage.Text = LblPrintMessage.Text & "MD," & txProduct.Text & " " & txSpec.Text & " " & NudMM.Value & "/" & NudYY.Value
-                        tc.WriteLine("MD," & txProduct.Text & " " & txSpec.Text & " " & NudMM.Value & "/" & NudYY.Value)
-                    End If
-                    If tc.Read() <> "" Then MessageBox.Show("Error Message not sent successfully", "Connection Error")
+                LblPrintMessage.Text = LblPrintMessage.Text & MessageCode & vbCr
+                tc.WriteLine(MessageCode)
+                If tc.Read() <> "" Then MessageBox.Show("Error Message not sent successfully", "Connection Error")
+                If cbPrintLogo.CheckState Then
+                    LblPrintMessage.Text = LblPrintMessage.Text & "MD,," & txProduct.Text & " " & txSpec.Text & " " & NudMM.Value & "/" & NudYY.Value
+                    tc.WriteLine("MD,," & txProduct.Text & " " & txSpec.Text & " " & NudMM.Value & "/" & NudYY.Value)
                 Else
-                    LblPrintMessage.Text = LblPrintMessage.Text & MessageCode & vbCr
-                    tc.WriteLine(MessageCode)
-                    If tc.Read() <> "" Then MessageBox.Show("Error Message not sent successfully", "Connection Error")
-                    If cbPrintLogo.CheckState Then
-                        LblPrintMessage.Text = LblPrintMessage.Text & "'MD,," & txProduct.Text & " " & txSpec.Text & " " & NudMM.Value & "/" & NudYY.Value & "/" & NudBatch.Value
-                        tc.WriteLine("MD,," & txProduct.Text & " " & txSpec.Text & " " & NudMM.Value & "/" & NudYY.Value & "/" & NudBatch.Value)
-                    Else
-                        LblPrintMessage.Text = LblPrintMessage.Text & "'MD,," & txProduct.Text & " " & txSpec.Text & " " & NudMM.Value & "/" & NudYY.Value & "/" & NudBatch.Value
-                        tc.WriteLine("MD," & txProduct.Text & " " & txSpec.Text & " " & NudMM.Value & "/" & NudYY.Value & "/" & NudBatch.Value)
-                    End If
-                    If tc.Read() <> "" Then MessageBox.Show("Error Message not sent successfully", "Connection Error")
+                    LblPrintMessage.Text = LblPrintMessage.Text & "MD," & txProduct.Text & " " & txSpec.Text & " " & NudMM.Value & "/" & NudYY.Value
+                    tc.WriteLine("MD," & txProduct.Text & " " & txSpec.Text & " " & NudMM.Value & "/" & NudYY.Value)
                 End If
+                If tc.Read() <> "" Then MessageBox.Show("Error Message not sent successfully", "Connection Error")
+
             Else
                 MessageBox.Show("Error connecting to Ci3500, ensure it is powered up, and connection cable is secure")
             End If
@@ -185,7 +153,6 @@ Public Class Main
             txProduct.ReadOnly = False
             txProduct.Focus()
             txSpec.ReadOnly = False
-            NudBatch.ReadOnly = False
             btCancel.Enabled = True
             btPrint.Enabled = True
             Me.AcceptButton = btPrint
@@ -194,8 +161,6 @@ Public Class Main
             txBarcode.Focus()
             NudMM.Enabled = False
             NudYY.Enabled = False
-            NudBatch.Enabled = False
-            NudBatch.Value = 0
             btSelect.Enabled = True
             Me.AcceptButton = btSelect
             btPrint.Enabled = False
@@ -215,13 +180,10 @@ Public Class Main
         btPrint.Enabled = False
         btCancel.Enabled = False
         txBarcode.Text = ""
-        NudBatch.ReadOnly = True
         NudMM.ReadOnly = True
         NudMM.Enabled = False
         NudYY.ReadOnly = True
         NudYY.Enabled = False
-        NudBatch.Enabled = False
-        NudBatch.Value = "0"
         txBarcode.ReadOnly = False
         txProduct.Text = ""
         txSpec.Text = ""
@@ -230,13 +192,21 @@ Public Class Main
     End Sub
 
     Private Sub btSettings_Click(sender As Object, e As EventArgs) Handles btSettings.Click
-        If My.Settings.PrinterIP <> "" Then
-            Settings.txPrinterIP.Text = My.Settings.PrinterIP
+        If My.Settings.PrinterIP3500 <> "" Then
+            Settings.txPrinterIP3500.Text = My.Settings.PrinterIP3500
         Else
-            Settings.txPrinterIP.Text = "192.168.0.36"
+            Settings.txPrinterIP3500.Text = "192.168.0.181"
         End If
+        If My.Settings.PrinterIP5300 <> "" Then
+            Settings.txPrinterIP5300.Text = My.Settings.PrinterIP5300
+        Else
+            Settings.txPrinterIP5300.Text = "192.168.0.180"
+        End If
+        ' 
+
         Settings.txPath.Text = My.Settings.SpreadsheetPath
         Settings.cbLogo.Text = My.Settings.Logo
+
         Settings.ShowDialog()
     End Sub
 
@@ -247,9 +217,6 @@ Public Class Main
             txProduct.ReadOnly = False
             txProduct.Focus()
             txSpec.ReadOnly = False
-            NudBatch.Value = 0
-            NudBatch.ReadOnly = False
-            NudBatch.Enabled = True
             NudMM.Enabled = True
             NudYY.Enabled = True
             btCancel.Enabled = True
@@ -260,8 +227,6 @@ Public Class Main
             txBarcode.Enabled = True
             txProduct.ReadOnly = True
             txSpec.ReadOnly = True
-            NudBatch.ReadOnly = True
-            NudBatch.Enabled = False
             NudMM.Enabled = False
             NudYY.Enabled = False
             txBarcode.ReadOnly = False
@@ -271,7 +236,6 @@ Public Class Main
             btCancel.Enabled = False
             txBarcode.Text = ""
             txProduct.Text = ""
-            NudBatch.Value = 0
             txSpec.Text = ""
 
         End If
@@ -328,40 +292,22 @@ Public Class Main
         End Try
     End Sub
 
-    Private Sub NudBatch_ValueChanged(sender As Object, e As EventArgs) Handles NudBatch.ValueChanged
-        If cbManualEntry.Checked = False Then
 
-            If NudBatch.Value <> 0 Then
-                btPrint.Enabled = True
-                btCancel.Enabled = True
-            Else
-                btPrint.Enabled = False
-                btCancel.Enabled = False
-            End If
-
-        End If
-    End Sub
-
-    Private Sub NudBatch_Leave(sender As Object, e As EventArgs) Handles NudBatch.Leave
-        If NudBatch.Value <> 0 Then
-            btSelect.Enabled = False
-            btPrint.Focus()
-        End If
-    End Sub
 
     Private Sub Main_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Dim version As String = System.Windows.Forms.Application.ProductVersion
         Me.Text = Me.Text & " Version : " & version
         Me.Icon = My.Resources.PedderIcon
         cbManualEntry.Checked = False
+        ' Set Both Printers to On.
+        cbCi3500.Checked = True
+        cbCi5300.Checked = True
 
-
+        'Define Spreadsheet Path
         If My.Settings.SpreadsheetPath = "" Then
             SpringPath = MyDocuments & "\Spring.xls"
-            BatchPath = MyDocuments & "\Batch_Required.xls"
         Else
             SpringPath = My.Settings.SpreadsheetPath & "\Spring.xls"
-            BatchPath = My.Settings.SpreadsheetPath & "\Batch_Required.xls"
         End If
         'Set  Logo from Settings
         If My.Settings.Logo = "Pedders" Then
